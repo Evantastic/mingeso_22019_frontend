@@ -24,7 +24,7 @@
 
       <v-select
         v-model="select"
-        :carreras="carreras"
+        :items="carreras"
         :rules="[v => !!v || 'Carrera es requerida']"
         label="Carrera"
         required
