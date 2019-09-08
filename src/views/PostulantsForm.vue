@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container justify-center>
         <Form></Form>
     </v-container>
 </template>

@@ -36,7 +36,7 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Sistema de postulación</v-toolbar-title>
     </v-app-bar>
 
     <v-content>
