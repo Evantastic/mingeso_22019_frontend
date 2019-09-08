@@ -24,7 +24,7 @@ export default {
       },
       { text: 'Rut', value: 'rut' },
       { text: 'Fecha Nacimiento', value: 'birthDay' },
-      { text: 'Carrera', value: 'career' },
+      { text: 'Carrera postulada', value: 'career' },
     ],
     postulants: [
       {

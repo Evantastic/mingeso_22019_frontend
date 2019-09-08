@@ -23,7 +23,7 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
-              <router-link to="/postulantsList">RutaList</router-link>
+              <router-link to="/postulantsList">Lista de postulantes</router-link>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
