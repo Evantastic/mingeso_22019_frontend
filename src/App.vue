@@ -1,79 +1,78 @@
 <template>
-  <v-container>
-    <div id="app">
-  <v-app id="inspire">
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-    >
-      <v-list dense>
-        <v-list-item @click="">
-          <v-list-item-action>
-            
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              <router-link to="/postulantsForm">Formulario</router-link>
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item @click="">
-          <v-list-item-action>
-            
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              <router-link to="/postulantsList">Lista de postulantes</router-link>
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
 
-    <v-app-bar
-      app
-      color="indigo"
-      dark
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Sistema de postulación</v-toolbar-title>
-    </v-app-bar>
+  <!-- todo template debe tener un archivo root por defecto, solo 1 -->
+  <!-- en este caso tenemos toda la aplicación -->
 
-    <v-content>
-      <v-container
-        fluid
-        fill-height
-      >
-        <v-layout
-          align-center
-          justify-center
-        >
-        <router-view/>
-          <v-flex text-xs-center>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-content>
-    <v-footer
-      color="indigo"
-      app
-    >
-      <span class="white--text">&copy; 2019</span>
-    </v-footer>
+  <v-app id="app_background">
+    
+      <!-- hacemos uso del componente importado antes -->
+      <!-- tambien podemos llamarlo de la forma : <navbar />  -->
+
+      <navbar></navbar>
+
+
+      <!-- notemos que luego del componente de navbar viene el cuerpo -->
+
+      <!-- para el cuerpo utilizamos <v-content> propio de vuetify -->
+      <v-content>
+
+        <!-- el routerview hace referencia a todos los path y componenten en "router" -->
+        <!-- router-view mostrará la pagina actual dependiendo de la ruta que se tenga en el navegador -->
+
+        <router-view />
+
+      </v-content>
+
+      <!-- luego del cuerpo utilizamos el footer como componente final, (podriamos usar otro)  -->
+
+      <Footer></Footer>
+    
   </v-app>
-</div>
-  </v-container>
+
+
 </template>
 
 <script>
-import Home from './views/Home';
+
+
+import navbar from "./components/navbar";
+import Footer from "./components/footer";
+
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Home
+    navbar,
+    Footer
   },
   data: () => ({
-    drawer: null
-  }),
+    //
+  })
 };
 </script>
+
+
+<style scoped>
+
+
+/* un estilo con scoped solo afectará a los componentes dentro de este archivo .vue */
+
+
+
+
+/* los "." hacen referencia a las clases
+   los "#" hacen referencia a los id´s
+ */
+
+
+.back-img {
+  background-image: url("./assets/imgs/back-connect.svg");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+#app_background {
+  background-color: #f1f0ee;
+}
+
+
+</style>
