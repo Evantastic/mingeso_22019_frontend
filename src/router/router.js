@@ -10,6 +10,9 @@ Vue.use(Router)
 
 export default new Router({
 
+  // esto elimina el # de la ruta
+  mode: 'history',
+
   // en general cada ruta debe tener un "path" y un componente que muestre ese path
 
   routes: [
