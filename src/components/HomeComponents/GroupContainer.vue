@@ -6,13 +6,12 @@
 
     <v-row justify="center" align="center">
       <v-img
+        class="mx-5"
         :src="require('@/assets/imgs/Group.svg')"
-        min-height="400"
-        max-height="800"
-        max-width="880"
-        min-width="400"
+        max-height="600"
+        max-width="660"
       ></v-img>
-      <v-col cols="6">
+      <v-col cols="12">
         <v-row align="center" justify="center">
           <div v-for="person in team" :key="person.name" class="mx-auto">
             <v-card class="mx-1 custom-card-style" max-width="200">
@@ -35,7 +34,7 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-img :src="require('@/assets/imgs/divider.svg')" max-height="50" max-width="300"></v-img>
+    <v-img :src="require('@/assets/imgs/divider.svg')" max-height="50" max-width="500"></v-img>
   </v-container>
 </template>
 
@@ -77,7 +76,7 @@ export default {
         {
           name: "Nicolás",
           avatar:
-            "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortWaved&accessoriesType=Prescription02&hairColor=Black&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=Hoodie&clotheColor=Heather&eyeType=Side&eyebrowType=DefaultNatural&mouthType=Sad&skinColor=Light",
+            "https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortWaved&accessoriesType=Prescription02&hairColor=Black&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=Hoodie&clotheColor=Black&eyeType=Squint&eyebrowType=UnibrowNatural&mouthType=Serious&skinColor=Pale",
           job: "Front"
         }
       ]

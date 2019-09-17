@@ -1,39 +1,48 @@
 <template>
-
-
   <!-- etiqueta propia de vuetiy para crear el navbar -->
   <v-app-bar
-    app  
+    app
     elevate-on-scroll
     class="custom-color-navbar pa-3"
-    :class="{'': scrollPosition <= 100, 'custom-solid': scrollPosition >= 100 }"
+    :class="{'': scrollPosition <= 1, 'custom-solid': scrollPosition > 1 }"
   >
-    <v-img class="test" :src="require('@/assets/logo.svg')" max-height="40" max-width="40"></v-img>
+    <v-img v-if="$vuetify.breakpoint.width > 400" class="test" :src="require('@/assets/logo.svg')" max-height="40" max-width="40"></v-img>
     <!-- espacios -->
     &nbsp;
     &nbsp;
     <!-- fin espacios -->
-    <v-toolbar-title class="headline text-uppercase">
+    <v-toolbar-title  class="headline text-uppercase">
       <span>DevOps|</span>
       <span class="font-weight-light">Grupo 3</span>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
-    <v-btn text to="/students">
+
+    <!-- ################## Parte responsive ################## -->
+
+    <v-btn v-if="$vuetify.breakpoint.mdAndUp" text to="/students">
       <span class="mr-2">Sistema de regstro de estudiantes</span>
     </v-btn>
+
     <v-divider inset class="custom-color-divider mx-5" vertical></v-divider>
-    <v-btn text to="/">
+
+    <v-btn v-if="$vuetify.breakpoint.mdAndUp" text to="/">
       <span class="mr-2">Inicio</span>
     </v-btn>
+
+    <menuNav v-if="$vuetify.breakpoint.smAndDown"></menuNav>
+
+
   </v-app-bar>
-
-
-
 </template>
 
 <script>
+import menuNav from "./menuComponents";
+
 export default {
+  components: {
+    menuNav
+  },
   data: () => ({
     scrollPosition: 0
   }),
@@ -53,8 +62,6 @@ export default {
 
 
 <style >
-
-
 .custom-color-navbar {
   background-color: transparent !important;
   transition: background-color 0.2s ease-out, box-shadow 0.2s ease-out !important;
@@ -67,6 +74,4 @@ export default {
 .custom-color-divider {
   border-color: black !important ;
 }
-
-
 </style>

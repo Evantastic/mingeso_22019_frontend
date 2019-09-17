@@ -2,7 +2,7 @@
 <template>
   <v-footer height="auto" color="black" class="lighten-1 text-center">
     <v-row justify="center" align="center" class="pt-5 px-4">
-      <v-col cols="6">
+      <v-col cols="12" lg="6" xl="6">
         <v-row align="center">
           <v-img
             class="test"
@@ -26,10 +26,10 @@
         </v-row>
       </v-col>
 
-      <v-col cols="6">
+      <v-col cols="12" lg="6" xl="6">
         <v-row justify="center" align="center">
           <v-col lighten-1 class="text-xs-center py-1" cols="5">
-            <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
+            <v-btn v-for="icon in icons" :key="icon" class="mx-4 my-4 white--text" icon>
               <v-icon size="35px">{{ icon }}</v-icon>
             </v-btn>
           </v-col>
