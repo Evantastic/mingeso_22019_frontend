@@ -1,4 +1,4 @@
-# mingeso3-2do2019-frontend
+# mingeso3-2do2019-frontend -> the best project
 
 ## Project setup
 ```
