@@ -1,6 +1,9 @@
 <template>
-  <v-container>
-  </v-container>
+  
+  <v-content>
+
+  </v-content>
+  
 </template>
 
 <script>

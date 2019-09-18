@@ -28,16 +28,16 @@
 
       <v-col cols="12" lg="6" xl="6">
         <v-row justify="center" align="center">
-          <v-col lighten-1 class="text-xs-center py-1" cols="5">
+          <v-col lighten-1 class="text-xs-center py-1" >
             <v-btn v-for="icon in icons" :key="icon" class="mx-4 my-4 white--text" icon>
-              <v-icon size="35px">{{ icon }}</v-icon>
+              <v-icon class="custom_link" size="35px">{{ icon }}</v-icon>
             </v-btn>
           </v-col>
 
           <v-divider class="light-footer-theme" vertical></v-divider>
 
-          <v-col class="text-xs-center white--text" cols="5">
-            <h2 display-3>Comentarios sobre el sitio</h2>
+          <v-col class="text-center white--text"  >
+            <h2 class="text-center " display-3><a class="custom_link white--text" href="/">Comentarios sobre el sitio</a></h2>
           </v-col>
         </v-row>
       </v-col>
@@ -75,6 +75,16 @@ export default {
 </script>
 
 <style scoped>
+
+.custom_link {
+  text-decoration: none;
+  transition: color 0.2s ease-out !important;
+}
+
+.custom_link:hover {
+  color : #2196F3 !important ; 
+}
+
 .white--text {
   color: white;
 }

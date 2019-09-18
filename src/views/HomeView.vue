@@ -1,6 +1,6 @@
 <template>
-  <div class="ultra-padding">
-    <DevopsComponent />
+  <div>
+    <DevopsComponent  />
     <GroupContainer />
   </div>
 </template>
