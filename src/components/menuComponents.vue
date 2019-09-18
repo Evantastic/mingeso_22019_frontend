@@ -15,7 +15,8 @@
             exact
             flat
             :ripple="false"
-            class="custom-menu-btn text-right"
+            exact-active-class="active-all"
+            class="custom-menu-btn text-right "
           >{{ item.title }}</v-btn>
         </v-list-item-title>
       </v-list-item>
@@ -37,9 +38,6 @@ export default {
 <style scoped>
 .custom-menu-btn {
   height: 50px !important;
-
-  font-size: 17px;
-  font-weight: bold;
   -webkit-transition: none !important;
   -moz-transition: none !important;
   -o-transition: none !important;
@@ -52,4 +50,12 @@ export default {
 .custom-menu-btn:hover {
   color:blue;
 }
+
+.active-all {
+  background-image: url("../assets/imgs/signal.svg");
+  background-size: 12px 20px;
+  background-position: 0% 45%;
+}
+
+
 </style>

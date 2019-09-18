@@ -20,8 +20,8 @@
 
     <!-- ################## Parte responsive ################## -->
 
-    <v-btn v-if="$vuetify.breakpoint.mdAndUp" text to="/students">
-      <span class="mr-2">Sistema de regstro de estudiantes</span>
+    <v-btn  v-if="$vuetify.breakpoint.mdAndUp" text to="/students">
+      <span class="mr-2">Estudiantes</span>
     </v-btn>
 
     <v-divider inset class="custom-color-divider mx-5" vertical></v-divider>
@@ -64,7 +64,7 @@ export default {
 <style >
 .custom-color-navbar {
   background-color: transparent !important;
-  transition: background-color 0.2s ease-out, box-shadow 0.2s ease-out !important;
+  transition: background-color 0.5s ease-out, box-shadow 0.5s ease-out !important;
 }
 
 .custom-solid {
@@ -74,4 +74,11 @@ export default {
 .custom-color-divider {
   border-color: black !important ;
 }
+
+.active-bot {
+  background-image: url("../assets/imgs/divider.svg");
+  background-size: 70px 15px;
+  background-position: 100% 100%;
+}
+
 </style>
