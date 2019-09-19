@@ -1,6 +1,8 @@
 <template>
   <v-container class="pa-5">
 
+    <studentform></studentform>
+
 
     <v-row justify="start">
       <h1
@@ -18,7 +20,7 @@
     <v-row class="pa-5" justify="center" align="center">
 
       <v-col class="text-center" >
-        <v-btn block height="70" color="secondary"  >
+        <v-btn block height="70" color="secondary" @click="setDialog(true)"  >
           Nueva Postulación
         </v-btn>
       </v-col>
@@ -43,7 +45,21 @@
 </template>
 
 <script>
-export default {};
+
+import studentform from "@/components/StudentComponents/StudentForm";
+
+import { mapMutations } from "vuex";
+
+export default {
+
+  components: {
+    studentform,
+  },
+  methods: {
+        ...mapMutations('studentStore',['setDialog']),
+        
+  },
+};
 </script>
 
 <style >

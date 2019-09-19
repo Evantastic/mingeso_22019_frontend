@@ -6,6 +6,8 @@ const state =
     error: false,
     loading: false,
     success: false,
+    dialog: false,
+
 };
 
 const mutations = 
@@ -18,7 +20,10 @@ const mutations =
     },
     setSuccess(state, payload) {
         state.success = payload;
-    }
+    },
+    setDialog(state, payload) {
+      state.dialog = payload;
+  }
 };
 
 const actions = 
