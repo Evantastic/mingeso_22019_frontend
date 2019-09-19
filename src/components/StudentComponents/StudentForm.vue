@@ -4,7 +4,10 @@
       <template>
         <v-card class="pa-5">
           <v-form ref="form" v-model="valid" >
+            <!-- Nombre -->
             <v-text-field v-model="name" :rules="nameRules" label="Nombre postulante" required></v-text-field>
+
+            <!-- -->
 
             <v-text-field v-model="rut" :rules="rutRules" label="Rut" required></v-text-field>
 
@@ -47,7 +50,7 @@
               hide-no-data
             ></v-autocomplete>
 
-            <v-btn :disabled="!valid" color="success" class="mr-4" >Enviar</v-btn>
+            <v-btn :disabled="!valid" color="success" class="mr-4" @click="sendCompleteInfo" :loading="this.loading">Enviar</v-btn>
 
             <v-btn color="error" class="mr-4" @click="closeForm">Cancelar</v-btn>
           </v-form>
@@ -58,7 +61,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import dataUsach from "@/data/carreras.json";
 
 export default {
@@ -85,7 +88,7 @@ export default {
       this.date=null;
   },
   computed: {
-    ...mapState("studentStore", ["dialog"]),
+    ...mapState("studentStore", ["dialog","loading"]),
     computedDateFormatted() {
       return this.formatDate(this.date);
     }
@@ -96,7 +99,20 @@ export default {
     }
   },
   methods: {
-    ...mapMutations("studentStore", ["setDialog"]),
+    ...mapMutations("studentStore", ["setDialog","setCareer","setName","setAge","setRut"]),
+    ...mapActions("studentStore", ["sendStudent"]),
+
+
+    sendCompleteInfo(){
+
+      //console.log(this.name,this.rut, this.select);
+      this.setCareer(this.select);
+      this.setName(this.name);
+      this.setAge(22);
+      this.setRut(this.rut);
+
+      this.sendStudent();
+    },
 
     closeForm () {
         this.$refs.form.reset();

@@ -1,59 +1,81 @@
 
 import axios from "axios";
 
-const state = 
+const state =
 {
-    error: false,
-    loading: false,
-    success: false,
-    dialog: false,
+  error: false,
+  loading: false,
+  success: false,
+  dialog: false,
+  name: null,
+  age: null,
+  career: null,
+  rut: null,
 
 };
 
-const mutations = 
+const mutations =
 {
-    setError(state, payload) {
-      state.error = payload;
-    },
-    setLoading(state, payload) {
-      state.loading = payload;
-    },
-    setSuccess(state, payload) {
-        state.success = payload;
-    },
-    setDialog(state, payload) {
-      state.dialog = payload;
+  setError(state, payload) {
+    state.error = payload;
+  },
+  setLoading(state, payload) {
+    state.loading = payload;
+  },
+  setSuccess(state, payload) {
+    state.success = payload;
+  },
+  setDialog(state, payload) {
+    state.dialog = payload;
+  },
+  setRut(state, payload) {
+    state.rut = payload;
+  },
+  setName(state, payload) {
+    state.name = payload;
+  },
+  setAge(state, payload) {
+    state.age = payload;
+  },
+  setCareer(state, payload) {
+    state.career = payload;
+  },
+};
+
+const actions =
+{
+  // payload debe ser un objeto que contenga todo lo necesario enviar a la API -> Json
+
+  async sendStudent({ commit }) {
+    console.log(state.name, state.rut, state.career, state.age);
+    commit("setLoading", true);
+    try {
+      await axios.post(
+        "http://35.224.191.225:8081/Backend/api/rest/students",
+        {
+          name: state.name,
+          rut: state.rut,
+          age: state.age,
+          career: state.career,
+        }
+      );
+      commit("setError", false);
+      commit("setSuccess", true);
+
+    } catch (error) {
+      commit("setError", true);
+      commit("setSuccess", false);
+    }
+
+    commit("setLoading", false);
   }
 };
 
-const actions = 
+export const studentStore =
 {
-    // payload debe ser un objeto que contenga todo lo necesario enviar a la API -> Json
-    
-    async sendStudent({ commit }, payload) {
-      commit("setLoading", true);
-      try {
-        await axios.post(
-          "https://jsonplaceholder.typicode.com/posts/",
-          { payload }
-        );
-        commit("setError", false);
-        commit("setSuccess", true);
-
-      } catch (error) {
-        commit("setError", true);
-        commit("setSuccess", false);
-      }
-
-      commit("setLoading", false);
-    }
-};
-
-export const studentStore  = 
-{
-    namespaced: true,
-    state,
-    mutations,
-    actions,
+  namespaced: true,
+  state,
+  mutations,
+  actions,
 }
 

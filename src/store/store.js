@@ -8,6 +8,8 @@ import { studentStore } from './studentStore'
 
 Vue.use(Vuex);
 
+
+
 export default new Vuex.Store({
   modules : {
     studentStore,
