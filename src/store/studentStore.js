@@ -74,28 +74,22 @@ const actions =
     commit("setLoading", false);
   },
   async receiveStudent({commit}){
-    const data = await fetch('http://35.224.191.225:8081/Backend/api/rest/students?page=1&quantity=50');
-    const estudiantes = await data.content.json();
-    commit('llenarLista', studentList)
-    /*
     commit("setLoading", true);
     try {
       await axios.get(
-        "http://35.224.191.225:8081/Backend/api/rest/students?page=1&quantity=50");
-        const data = response;
-        const students = await data.json();
-        commit('llenarLista',cursos)
-
+        "http://35.224.191.225:8081/Backend/api/rest/students?page=1&quantity=50")
+        .then(function(response){
+          const data = response.data.content;
+          commit('llenarLista',data)
+        })
         commit("setError", false);
         commit("setSuccess", true);
-
-
     } catch (error) {
       commit("setError", true);
       commit("setSuccess", false);
     }
     commit("setLoading", false);
-    */
+    
   },
 }
 
