@@ -2,6 +2,7 @@
   <v-container class="pa-5">
 
     <studentform></studentform>
+    <studentlist></studentlist>
 
 
     <v-row justify="start">
@@ -30,7 +31,7 @@
       </v-col>
 
       <v-col class="text-center">
-        <v-btn block height="70" outlined color="secondary" >
+        <v-btn block height="70" outlined color="secondary" @click="setDialogList(true)">
           Ver Postulaciones
         </v-btn>
       </v-col>
@@ -47,16 +48,17 @@
 <script>
 
 import studentform from "@/components/StudentComponents/StudentForm";
-
+import studentlist from "@/components/StudentComponents/StudentList";
 import { mapMutations } from "vuex";
 
 export default {
 
   components: {
     studentform,
+    studentlist
   },
   methods: {
-        ...mapMutations('studentStore',['setDialog']),
+        ...mapMutations('studentStore',['setDialog','setDialogList']),
         
   },
 };

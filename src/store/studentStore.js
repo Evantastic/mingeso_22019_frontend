@@ -7,6 +7,7 @@ const state =
   loading: false,
   success: false,
   dialog: false,
+  dialogList: false,
   name: null,
   age: null,
   career: null,
@@ -28,6 +29,9 @@ const mutations =
   },
   setDialog(state, payload) {
     state.dialog = payload;
+  },
+  setDialogList(state, payload) {
+    state.dialogList = payload;
   },
   setRut(state, payload) {
     state.rut = payload;
