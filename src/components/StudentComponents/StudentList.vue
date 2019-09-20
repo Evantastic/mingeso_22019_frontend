@@ -7,6 +7,8 @@
         <tr>
           <th class="text-left">Name</th>
           <th class="text-left">Rut</th>
+          <th class="text-left">Carrera</th>
+          <th class="text-left">Años</th>
           
         </tr>
       </thead>
@@ -14,6 +16,8 @@
         <tr v-for="item in studentList" :key="item.name">
           <td>{{ item.name }}</td>
           <td>{{ item.rut }}</td>
+          <td>{{ item.career }}</td>
+          <td>{{ item.age }}</td>
         </tr>
       </tbody>
     </template>
@@ -37,13 +41,8 @@
         ...mapMutations("studentStore",['llenarLista']),
         ...mapActions("studentStore",['receiveStudent']),
     },
-    mounted: {
-      listData(){
-        console.log(this.studentList);
-        this.receiveStudent();
-        console.log(this.studentList)
-        
-      }
+    mounted() {
+      this.receiveStudent();
     },
     /*
     mounted(){
