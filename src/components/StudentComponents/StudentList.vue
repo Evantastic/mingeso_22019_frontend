@@ -19,30 +19,6 @@
       ></v-data-table>
       <v-btn color="secondary" class="mr-5" @click="closeList">Volver</v-btn>
       </v-card>
-      <!--
-      <v-simple-table>
-        <template v-slot:default>
-          <thead>
-            
-            <tr>
-              <th class="text-left">Name</th>
-              <th class="text-left">Rut</th>
-              <th class="text-left">Carrera</th>
-              <th class="text-left">Años</th>
-              
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in studentList" :key="item.name">
-              <td>{{ item.name }}</td>
-              <td>{{ item.rut }}</td>
-              <td>{{ item.career }}</td>
-              <td>{{ item.age }}</td>
-            </tr>
-          </tbody>
-        </template>
-      </v-simple-table>
-      -->
       <v-divider></v-divider>
       <v-card-actions>
       

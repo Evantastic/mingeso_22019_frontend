@@ -2,9 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/HomeView'
 import Student from '@/views/StudentView'
-//STUDENTLIST ESTÁ SOLO PARA TESTEO (PARA VISUALIZARLO EN LA PÁGINA)
-import StudentList from '@/components/StudentComponents/StudentList'
-
 // @ -> hace referencia a la carpeta src/
 // . -> hace referencia a la carpeta actual
 
@@ -26,11 +23,6 @@ export default new Router({
     {
       path: '/students',
       component: Student,
-    },
-    //STUDENTLIST ESTÁ SOLO PARA TESTEO (BORRAR LUEGO)
-    {
-      path: '/test',
-      component: StudentList,
     },
   ]
 })
