@@ -1,6 +1,21 @@
 <template>
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="700">
+      <v-snackbar
+        v-model="success"
+        color="success"
+        bottom="true"
+        timeout="6000"
+      >
+        {{ 'Postulación realizada exitosamente'}}
+      <v-btn
+        color="white"
+        text
+        @click=setSuccess(false)
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
       <template>
         <v-card class="pa-5">
           <v-form ref="form" v-model="valid" >
@@ -50,9 +65,9 @@
               hide-no-data
             ></v-autocomplete>
 
-            <v-btn :disabled="!valid" color="success" class="mr-4" @click="sendCompleteInfo" :loading="this.loading">Enviar</v-btn>
+            <v-btn :disabled="!valid" color="success" class="mr-4" @click=sendCompleteInfo();resetForm();receiveStudent() :loading="this.loading">Enviar</v-btn>
 
-            <v-btn color="error" class="mr-4" @click="closeForm">Cancelar</v-btn>
+            <v-btn color="error" class="mr-4" @click="closeForm">Volver</v-btn>
           </v-form>
         </v-card>
       </template>
@@ -88,7 +103,7 @@ export default {
       this.date=null;
   },
   computed: {
-    ...mapState("studentStore", ["dialog","loading"]),
+    ...mapState("studentStore", ["dialog","loading","success"]),
     computedDateFormatted() {
       return this.formatDate(this.date);
     }
@@ -99,10 +114,13 @@ export default {
     }
   },
   methods: {
-    ...mapMutations("studentStore", ["setDialog","setCareer","setName","setAge","setRut"]),
-    ...mapActions("studentStore", ["sendStudent"]),
+    ...mapMutations("studentStore", ["setDialog","setCareer","setName","setAge","setRut","setSuccess"]),
+    ...mapActions("studentStore", ["sendStudent","receiveStudent"]),
 
-
+    resetForm(){
+      this.$refs.form.reset()
+      this.setSuccess(false)
+    },
     sendCompleteInfo(){
 
       //console.log(this.name,this.rut, this.select);
