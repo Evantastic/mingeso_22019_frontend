@@ -31,7 +31,7 @@
       </v-col>
 
       <v-col class="text-center">
-        <v-btn block height="70" outlined color="secondary" @click="setDialogList(true)">
+        <v-btn block height="70"  color="secondary" @click="setDialogList(true)">
           Ver Postulaciones
         </v-btn>
       </v-col>

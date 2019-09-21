@@ -1,6 +1,25 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialogList" persistent max-width="700">
+    <v-dialog v-model="dialogList" persistent scrollabl max-width="800">
+      <v-card class="pa-9">
+        <v-card-title>
+          Postulaciones
+          <div class="flex-grow-1"></div>
+            <v-text-field
+            v-model="search"
+            label="Search"
+            single-line
+            hide-details
+            ></v-text-field>
+        </v-card-title>
+        <v-data-table
+          :headers="headers"
+          :items="studentList"
+          :search="search"
+      ></v-data-table>
+      <v-btn color="secondary" class="mr-5" @click="closeList">Volver</v-btn>
+      </v-card>
+      <!--
       <v-simple-table>
         <template v-slot:default>
           <thead>
@@ -23,7 +42,11 @@
           </tbody>
         </template>
       </v-simple-table>
-      <v-btn color="error" class="mr-4" @click="closeList">Volver</v-btn>
+      -->
+      <v-divider></v-divider>
+      <v-card-actions>
+      
+      </v-card-actions>
     </v-dialog>
   </v-row>
 </template>
@@ -34,6 +57,19 @@
   export default {
     data () {
       return {
+        search: '',
+        headers: [{
+          text: 'Postulante',
+          align: 'left',
+          value: 'name',
+        },
+        {text: 'Rut' , value: 'rut'},
+        {text: 'Carrera' , value: 'career'},
+        {text: 'Edad' , value: 'age'},
+        
+        
+        
+        ],
         estudiantes: []
       }
     },
