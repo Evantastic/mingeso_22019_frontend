@@ -43,16 +43,16 @@
                     <v-text-field
                       v-model="dateFormatted"
                       label="Fecha de nacimiento"
-                      hint="En formato : dd/mm/aaaa"
+                      hint="En formato : dd-mm-aaaa"
                       persistent-hint
-                      @blur="date = formatDate(dateFormatted)"
+                      @blur="date = parseDate(dateFormatted)"
                       v-on="on"
                       :rules="dateRules"
                       required
                       class="pb-5"
                     ></v-text-field>
                   </template>
-                  <v-date-picker v-model="date" no-title @input="menuDate = false"></v-date-picker>
+                  <!-- <v-date-picker v-model="date" no-title @input="menuDate = false"></v-date-picker>-->
                 </v-menu>
               
 

@@ -77,6 +77,7 @@ const actions =
       console.log('paseeeee');
 
     } catch (error) {
+      console.log(error);
       commit("setError", true);
       commit("setSuccess", false);
     }
