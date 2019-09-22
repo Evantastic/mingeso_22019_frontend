@@ -88,7 +88,7 @@ const actions =
     commit("setLoading", true);
     try {
       await axios.get(
-        "http://35.224.191.225:8081/Backend/api/rest/students?page=1&quantity=50")
+        "http://35.224.191.225:8081/Backend/api/rest/students?page=0&quantity=50")
         .then(function(response){
           const data = response.data.content;
           commit('llenarLista',data)

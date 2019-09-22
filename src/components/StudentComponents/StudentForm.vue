@@ -1,10 +1,10 @@
 <template>
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="700">
-      <!--<v-snackbar
-        v-model="success"
-        color="success"
-        bottom="true"
+      <v-snackbar
+        v-model=success
+        color=success
+        bottom=true
         timeout="6000"
       >
         {{ 'Postulación realizada exitosamente'}}
@@ -15,7 +15,7 @@
       >
         Close
       </v-btn>
-    </v-snackbar>-->
+    </v-snackbar>
       <template>
         <v-card class="pa-5">
           <v-form ref="form" v-model="valid" >
