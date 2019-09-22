@@ -2,9 +2,9 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="700">
       <v-snackbar
-        v-model=success
-        color=success
-        bottom=true
+        v-model="success"
+        color="success"
+        bottom="true"
         timeout="6000"
       >
         {{ 'Postulación realizada exitosamente'}}
@@ -21,7 +21,7 @@
           <v-form ref="form" v-model="valid" >
             <!-- Nombre -->
             <v-text-field v-model="firstName" :rules="nameRules" label="Nombre postulante" required></v-text-field>
-            <v-text-field v-model="lastName" :rules="nameRules" label="Apellido postulante" required></v-text-field>
+            <v-text-field v-model="lastName" :rules="lastNameRules" label="Apellido postulante" required></v-text-field>
 
             <!-- -->
 
@@ -45,14 +45,13 @@
                       label="Fecha de nacimiento"
                       hint="En formato : dd-mm-aaaa"
                       persistent-hint
-                      @blur="date = parseDate(dateFormatted)"
                       v-on="on"
                       :rules="dateRules"
                       required
                       class="pb-5"
                     ></v-text-field>
                   </template>
-                  <!-- <v-date-picker v-model="date" no-title @input="menuDate = false"></v-date-picker>-->
+                  <!-- <v-date-picker v-model="date" no-title @input="menuDate = false"></v-date-picker> -->
                 </v-menu>
               
 
@@ -89,6 +88,7 @@ export default {
     firstName: "",
     lastName: "",
     nameRules: [v => !!v || "El nombre es requerido"],
+    lastNameRules: [v => !!v || "El apellido es requerido"],
     rut: "",
     rutRules: [
       v => !!v || "El rut es requerido",
