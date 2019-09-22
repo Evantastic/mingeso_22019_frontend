@@ -35,13 +35,14 @@
       return {
         search: '',
         headers: [{
-          text: 'Postulante',
+          text: 'Nombre',
           align: 'left',
-          value: 'name',
+          value: 'firstName',
         },
+        {text: 'Apellido' , value: 'lastName'},
         {text: 'Rut' , value: 'rut'},
         {text: 'Carrera' , value: 'career'},
-        {text: 'Edad' , value: 'age'},
+        {text: 'Fecha de Nacimiento' , value: 'birth'},
         
         
         

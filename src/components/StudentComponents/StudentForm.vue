@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="700">
-      <v-snackbar
+      <!--<v-snackbar
         v-model="success"
         color="success"
         bottom="true"
@@ -15,12 +15,13 @@
       >
         Close
       </v-btn>
-    </v-snackbar>
+    </v-snackbar>-->
       <template>
         <v-card class="pa-5">
           <v-form ref="form" v-model="valid" >
             <!-- Nombre -->
-            <v-text-field v-model="name" :rules="nameRules" label="Nombre postulante" required></v-text-field>
+            <v-text-field v-model="firstName" :rules="nameRules" label="Nombre postulante" required></v-text-field>
+            <v-text-field v-model="lastName" :rules="nameRules" label="Apellido postulante" required></v-text-field>
 
             <!-- -->
 
@@ -44,7 +45,7 @@
                       label="Fecha de nacimiento"
                       hint="En formato : dd/mm/aaaa"
                       persistent-hint
-                      @blur="date = parseDate(dateFormatted)"
+                      @blur="date = formatDate(dateFormatted)"
                       v-on="on"
                       :rules="dateRules"
                       required
@@ -85,7 +86,8 @@ export default {
     dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
     menuDate: false,
     valid: true,
-    name: "",
+    firstName: "",
+    lastName: "",
     nameRules: [v => !!v || "El nombre es requerido"],
     rut: "",
     rutRules: [
@@ -114,7 +116,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations("studentStore", ["setDialog","setCareer","setName","setAge","setRut","setSuccess"]),
+    ...mapMutations("studentStore", ["setDialog","setCareer","setFirstName","setLastName","setBirth","setRut","setSuccess"]),
     ...mapActions("studentStore", ["sendStudent","receiveStudent"]),
 
     resetForm(){
@@ -125,8 +127,9 @@ export default {
 
       //console.log(this.name,this.rut, this.select);
       this.setCareer(this.select);
-      this.setName(this.name);
-      this.setAge(22);
+      this.setFirstName(this.firstName);
+      this.setLastName(this.lastName);
+      this.setBirth(this.dateFormatted);
       this.setRut(this.rut);
 
       this.sendStudent();

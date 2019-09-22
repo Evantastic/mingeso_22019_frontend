@@ -8,8 +8,9 @@ const state =
   success: false,
   dialog: false,
   dialogList: false,
-  name: null,
-  age: null,
+  firstName: null,
+  lastName: null,
+  birth: null,
   career: null,
   rut: null,
   studentList: []
@@ -36,11 +37,14 @@ const mutations =
   setRut(state, payload) {
     state.rut = payload;
   },
-  setName(state, payload) {
-    state.name = payload;
+  setFirstName(state, payload) {
+    state.firstName = payload;
   },
-  setAge(state, payload) {
-    state.age = payload;
+  setLastName(state, payload) {
+    state.lastName = payload;
+  },
+  setBirth(state, payload) {
+    state.birth = payload;
   },
   setCareer(state, payload) {
     state.career = payload;
@@ -55,20 +59,22 @@ const actions =
   // payload debe ser un objeto que contenga todo lo necesario enviar a la API -> Json
 
   async sendStudent({ commit }) {
-    console.log(state.name, state.rut, state.career, state.age);
+    console.log(state.firstName,state.lastName, state.rut, state.career, state.birth);
     commit("setLoading", true);
     try {
       await axios.post(
         "http://35.224.191.225:8081/Backend/api/rest/students",
         {
-          name: state.name,
+          firstName: state.firstName,
+          lastName: state.lastName,
           rut: state.rut,
-          age: state.age,
+          birth: state.birth,
           career: state.career,
         }
       );
       commit("setError", false);
       commit("setSuccess", true);
+      console.log('paseeeee');
 
     } catch (error) {
       commit("setError", true);
