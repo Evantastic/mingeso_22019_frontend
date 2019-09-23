@@ -1,6 +1,5 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialogList" persistent scrollabl max-width="800">
       <v-card class="pa-9">
         <v-card-title>
           Postulaciones
@@ -21,9 +20,7 @@
       </v-card>
       <v-divider></v-divider>
       <v-card-actions>
-      
       </v-card-actions>
-    </v-dialog>
   </v-row>
 </template>
 <script>
@@ -34,6 +31,7 @@
     data () {
       return {
         search: '',
+        page: 0,
         headers: [{
           text: 'Nombre',
           align: 'left',
@@ -54,7 +52,7 @@
         ...mapState("studentStore",['studentList','dialogList'])
     },
     methods: {
-        ...mapMutations("studentStore",['llenarLista','setDialogList']),
+        ...mapMutations("studentStore",['llenarLista','setDialogList','setPage']),
         ...mapActions("studentStore",['receiveStudent']),
         closeList () {
           this.setDialogList(false);

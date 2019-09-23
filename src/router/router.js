@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/HomeView'
 import Student from '@/views/StudentView'
+import StudentAll from '@/views/StudentViewAll'
+
 // @ -> hace referencia a la carpeta src/
 // . -> hace referencia a la carpeta actual
 
@@ -23,6 +25,10 @@ export default new Router({
     {
       path: '/students',
       component: Student,
+    },
+    {
+      path: '/students/all',
+      component: StudentAll,
     },
   ]
 })

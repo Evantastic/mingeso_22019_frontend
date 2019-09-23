@@ -2,8 +2,6 @@
   <v-container class="pa-5">
 
     <studentform></studentform>
-    <studentlist></studentlist>
-
 
     <v-row justify="start">
       <h1
@@ -11,7 +9,6 @@
         :class="$vuetify.breakpoint.smAndDown ? 'text-center' : '' "
       >Sistema de registro de Estudiantes</h1>
     </v-row>
-
 
     <v-row class="py-5" justify="center" align="center">
       <v-img :src="require('@/assets/imgs/students.svg')" max-height="600" max-width="600"></v-img>
@@ -31,7 +28,7 @@
       </v-col>
 
       <v-col class="text-center">
-        <v-btn block height="70"  color="secondary" @click=setDialogList(true);receiveStudent()>
+        <v-btn block height="70"  outlined color="secondary" to="/students/all">
           Ver Postulaciones
         </v-btn>
       </v-col>
@@ -48,14 +45,12 @@
 <script>
 
 import studentform from "@/components/StudentComponents/StudentForm";
-import studentlist from "@/components/StudentComponents/StudentList";
 import { mapMutations } from "vuex";
 
 export default {
 
   components: {
     studentform,
-    studentlist
   },
   methods: {
         ...mapMutations('studentStore',['setDialog','setDialogList']),

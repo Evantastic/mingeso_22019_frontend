@@ -1,59 +1,68 @@
 <template>
   <v-row justify="center">
+
     <v-dialog v-model="dialog" persistent max-width="700">
-      <v-snackbar
-        v-model="success"
-        color="success"
-        bottom="true"
-        timeout="6000"
-      >
+      <v-snackbar v-model="this.success" color="success" :bottom="true">
         {{ 'Postulación realizada exitosamente'}}
-      <v-btn
-        color="white"
-        text
-        @click=setSuccess(false)
-      >
-        Close
-      </v-btn>
-    </v-snackbar>
+        <v-btn color="white" text @click="setSuccess(null)">Cerrar</v-btn>
+      </v-snackbar>
+      <v-snackbar v-model="this.error" color="error" :bottom="true">
+        {{ 'No se ha podido realizar la postulación'}}
+        <v-btn color="white" text @click="setSuccess(null)">Cerrar</v-btn>
+      </v-snackbar>
+
       <template>
         <v-card class="pa-5">
-          <v-form ref="form" v-model="valid" >
+          <h1>Nueva Postulación</h1>
+          <v-divider></v-divider>
+          <v-form ref="form" v-model="valid">
             <!-- Nombre -->
-            <v-text-field v-model="firstName" :rules="nameRules" label="Nombre postulante" required></v-text-field>
-            <v-text-field v-model="lastName" :rules="lastNameRules" label="Apellido postulante" required></v-text-field>
-
+            <v-row>
+              <v-col>
+                <v-text-field
+                  v-model="firstName"
+                  :rules="nameRules"
+                  label="Nombre postulante"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col>
+                <v-text-field
+                  v-model="lastName"
+                  :rules="lastNameRules"
+                  label="Apellido postulante"
+                  required
+                ></v-text-field>
+              </v-col>
+            </v-row>
             <!-- -->
 
             <v-text-field v-model="rut" :rules="rutRules" label="Rut" required></v-text-field>
 
-            
-                <v-menu
-                  ref="menuDate"
-                  v-model="menuDate"
-                  :close-on-content-click="false"
-                  transition="scale-transition"
-                  offset-y
-                  full-width
-                  max-width="290px"
-                  min-width="290px"
-                  
-                >
-                  <template v-slot:activator="{ on }">
-                    <v-text-field
-                      v-model="dateFormatted"
-                      label="Fecha de nacimiento"
-                      hint="En formato : dd-mm-aaaa"
-                      persistent-hint
-                      v-on="on"
-                      :rules="dateRules"
-                      required
-                      class="pb-5"
-                    ></v-text-field>
-                  </template>
-                  <!-- <v-date-picker v-model="date" no-title @input="menuDate = false"></v-date-picker> -->
-                </v-menu>
-              
+            <v-menu
+              ref="menuDate"
+              v-model="menuDate"
+              :close-on-content-click="false"
+              transition="scale-transition"
+              offset-y
+              full-width
+              max-width="290px"
+              min-width="290px"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="dateFormatted"
+                  label="Fecha de nacimiento"
+                  hint="En formato : dd-mm-aaaa"
+                  persistent-hint
+                  v-on="on"
+                  :rules="dateRules"
+                  required
+                  class="pb-5"
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="date" no-title @input="menuDate = false"></v-date-picker>
+            </v-menu>
 
             <v-autocomplete
               v-model="select"
@@ -65,7 +74,13 @@
               hide-no-data
             ></v-autocomplete>
 
-            <v-btn :disabled="!valid" color="success" class="mr-4" @click=sendCompleteInfo();resetForm();receiveStudent() :loading="this.loading">Enviar</v-btn>
+            <v-btn
+              :disabled="!valid"
+              color="success"
+              class="mr-4"
+              @click="sendCompleteInfo();resetForm();receiveStudent()"
+              :loading="this.loading"
+            >Enviar</v-btn>
 
             <v-btn color="error" class="mr-4" @click="closeForm">Volver</v-btn>
           </v-form>
@@ -93,7 +108,7 @@ export default {
     rutRules: [
       v => !!v || "El rut es requerido",
       v =>
-        /^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(v) ||
+        /^\d{7,8}[-][0-9kK]{1}$/.test(v) ||
         "El rut debe ser valido (XXXXXXXXX-X)"
     ],
     dateRules: [v => !!v || "La fecha de nacimiento es requerida"],
@@ -102,10 +117,10 @@ export default {
     checkbox: false
   }),
   created() {
-      this.date=null;
+    this.date = null;
   },
   computed: {
-    ...mapState("studentStore", ["dialog","loading","success"]),
+    ...mapState("studentStore", ["dialog", "loading", "success","error"]),
     computedDateFormatted() {
       return this.formatDate(this.date);
     }
@@ -116,15 +131,22 @@ export default {
     }
   },
   methods: {
-    ...mapMutations("studentStore", ["setDialog","setCareer","setFirstName","setLastName","setBirth","setRut","setSuccess"]),
-    ...mapActions("studentStore", ["sendStudent","receiveStudent"]),
+    ...mapMutations("studentStore", [
+      "setDialog",
+      "setCareer",
+      "setFirstName",
+      "setLastName",
+      "setBirth",
+      "setRut",
+      "setSuccess"
+    ]),
+    ...mapActions("studentStore", ["sendStudent", "receiveStudent"]),
 
-    resetForm(){
-      this.$refs.form.reset()
-      this.setSuccess(false)
+    resetForm() {
+      this.$refs.form.reset();
+      this.setSuccess(false);
     },
-    sendCompleteInfo(){
-
+    sendCompleteInfo() {
       //console.log(this.name,this.rut, this.select);
       this.setCareer(this.select);
       this.setFirstName(this.firstName);
@@ -135,16 +157,16 @@ export default {
       this.sendStudent();
     },
 
-    closeForm () {
-        this.$refs.form.reset();
-        this.setDialog(false);
+    closeForm() {
+      this.$refs.form.reset();
+      this.setDialog(false);
     },
 
     formatDate(date) {
       if (!date) return null;
 
       const [year, month, day] = date.split("-");
-      return `${day}/${month}/${year}`;
+      return `${day}-${month}-${year}`;
     },
     parseDate(date) {
       if (!date) return null;

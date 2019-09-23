@@ -4,8 +4,11 @@ import axios from "axios";
 const state =
 {
   error: false,
+  errorG: false,
   loading: false,
+  loadingG: false,
   success: false,
+  successG: false,
   dialog: false,
   dialogList: false,
   firstName: null,
@@ -13,6 +16,7 @@ const state =
   birth: null,
   career: null,
   rut: null,
+  page: 0,
   studentList: []
 
 };
@@ -22,11 +26,20 @@ const mutations =
   setError(state, payload) {
     state.error = payload;
   },
+  setErrorG(state, payload) {
+    state.errorG = payload;
+  },
   setLoading(state, payload) {
     state.loading = payload;
   },
+  setLoadingG(state, payload) {
+    state.loadingG = payload;
+  },
   setSuccess(state, payload) {
     state.success = payload;
+  },
+  setSuccessG(state, payload) {
+    state.successG = payload;
   },
   setDialog(state, payload) {
     state.dialog = payload;
@@ -49,15 +62,18 @@ const mutations =
   setCareer(state, payload) {
     state.career = payload;
   },
+  setPage(state, payload) {
+    state.page = payload;
+  },
   llenarLista(state,payload){
-    state.studentList = payload;
+    state.studentList.push(payload);
   }
 };
 
 const actions =
 {
   // payload debe ser un objeto que contenga todo lo necesario enviar a la API -> Json
-
+  
   async sendStudent({ commit }) {
     console.log(state.firstName,state.lastName, state.rut, state.career, state.birth);
     commit("setLoading", true);
@@ -72,35 +88,36 @@ const actions =
           career: state.career,
         }
       );
-      commit("setError", false);
       commit("setSuccess", true);
-      console.log('paseeeee');
 
     } catch (error) {
       console.log(error);
       commit("setError", true);
-      commit("setSuccess", false);
     }
-
     commit("setLoading", false);
   },
+
+
   async receiveStudent({commit}){
-    commit("setLoading", true);
+    commit("setLoadingG", true);
     try {
       await axios.get(
-        "http://35.224.191.225:8081/Backend/api/rest/students?page=0&quantity=50")
+        "http://35.224.191.225:8081/Backend/api/rest/students?page="+state.page+"&quantity=10")
         .then(function(response){
           const data = response.data.content;
-          commit('llenarLista',data)
+          commit('llenarLista',data);
         })
-        commit("setError", false);
-        commit("setSuccess", true);
+        if (state.page < state.studentList.length ) {
+          commit("setPage", state.page+1);  
+        }
+        commit("setSuccessG", true);
+        
     } catch (error) {
-      commit("setError", true);
-      commit("setSuccess", false);
+      commit("setErrorG", true);
+      
     }
-    commit("setLoading", false);
-    commit("setSuccess", false);
+    commit("setLoadingG", false);
+    
     
   },
 }
