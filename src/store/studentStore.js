@@ -65,6 +65,9 @@ const mutations =
   setPage(state, payload) {
     state.page = payload;
   },
+  setLista(state, payload) {
+    state.studentList = payload;
+  },
   llenarLista(state,payload){
     state.studentList.push(payload);
   }
@@ -89,6 +92,8 @@ const actions =
         }
       );
       commit("setSuccess", true);
+      commit("setLista", []);
+      commit("setPage", 0);
 
     } catch (error) {
       console.log(error);
