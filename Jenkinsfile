@@ -1,4 +1,4 @@
-//install docker 
+// install docker 
 // tutorial : https://getintodevops.com/blog/the-simple-way-to-run-docker-in-docker-for-ci
 
 pipeline {
@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'npm run test'
+                sh 'node_modules/.bin/wdio test/wdio.conf.js'
                 sh 'docker --version'
                 echo 'Testing..'
             }
