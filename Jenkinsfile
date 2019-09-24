@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'node_modules/.bin/wdio'
+                sh './node_modules/.bin/wdio wdio.conf.js'
                 sh 'docker --version'
                 echo 'Testing..'
             }

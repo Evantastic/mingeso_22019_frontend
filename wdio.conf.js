@@ -259,4 +259,10 @@ exports.config = {
         }]
     ],
     // ...
+    capabilities: {
+    'browserName': 'chrome',
+    "chromeOptions": {
+      binary: "/Applications/your_path/Google Chrome.app/Contents/MacOS/Google Chrome"
+        }
+    }
 }
