@@ -3,7 +3,7 @@
     <v-container>
       <v-row class="max-height py-5" justify="center" align="start">
         <v-col align-self="center" cols="12" md="6" lg="6" xl="6">
-          <h1 class="text-title text--black pb-5">DevOps</h1>
+          <h1 class="text-title text--black pb-5">DevOps 2019</h1>
           <span
             
             class="text--black"
