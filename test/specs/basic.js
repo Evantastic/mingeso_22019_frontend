@@ -1,7 +1,7 @@
 const assert = require('assert')
 
 describe('webdriver.io page', () => {
-    it('should have the right title', () => {
+    it('Título correcto', () => {
         browser.url('https://webdriver.io')
         const title = browser.getTitle()
         assert.strictEqual(title, 'WebdriverIO · Next-gen WebDriver test framework for Node.js')
@@ -9,7 +9,7 @@ describe('webdriver.io page', () => {
 })
 
 describe('webdriver.io page', () => {
-    it('should switch to another window', () => {
+    it('Cambia a otra página', () => {
         // open url
         browser.url('https://google.com')
         // create new window
@@ -22,8 +22,10 @@ describe('webdriver.io page', () => {
 })
 
 describe('webdriver.io page', () => {
-    // navigate to a new URL
-    browser.url('https://webdriver.io');
-    // receive url
-    console.log(browser.getUrl());
+    it('Obtiene url', () => {
+        // navigate to a new URL
+        browser.url('');
+        // receive url
+        console.log(browser.getUrl());
+    })
 })
