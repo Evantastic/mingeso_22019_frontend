@@ -132,9 +132,10 @@ exports.config = {
         'spec',
         ['junit', {
             outputDir: './',
-             outputFileFormat: function(options) { // optional
-                return `results-${options.cid}.${options.capabilities}.xml`
-            }
+             outputFileFormat: 
+                function(options) { // optional
+                  return "test.xml"
+                }
         }]
     ],
     //
