@@ -23,13 +23,17 @@ pipeline {
         stage('Test') {
             steps {
                 sh './node_modules/.bin/wdio wdio.conf.js'
-                junit '/home/alan/.jenkins/workspace/frontend/test.xml'
             }
         }
         stage('Deploy') {
             steps {
                 sh './frontDeploy.sh'
             }
+        }
+    }
+    post {
+        always {
+            junit '*.xml'
         }
     }
 }
