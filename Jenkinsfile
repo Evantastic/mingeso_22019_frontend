@@ -23,7 +23,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh './node_modules/.bin/wdio wdio.conf.js'
-                //junit './test-results/*.log'
+                junit './*.xml'
             }
         }
         stage('Deploy') {
