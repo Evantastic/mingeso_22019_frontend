@@ -13,7 +13,6 @@
     "core-js": "^2.6.5",
     "npm-watch": "^0.6.0",
     "roboto-fontface": "*",
-    "selenium-webdriver": "^4.0.0-alpha.5",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuetify": "^2.0.0",
