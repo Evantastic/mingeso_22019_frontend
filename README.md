@@ -1,4 +1,4 @@
-# mingeso3-2do2019-frontend -> the best project
+# hotel-mitimiti
 
 ## Project setup
 ```

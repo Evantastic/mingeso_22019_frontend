@@ -1,0 +1,43 @@
+{
+  "name": "mingeso3-2do2019-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.2",
+    "axios": "^0.19.0",
+    "core-js": "^2.6.5",
+    "npm-watch": "^0.6.0",
+    "roboto-fontface": "*",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3",
+    "vuetify": "^2.0.0",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.11.0",
+    "@vue/cli-plugin-eslint": "^3.11.0",
+    "@vue/cli-service": "^3.11.0",
+    "@wdio/cli": "^5.13.1",
+    "@wdio/junit-reporter": "^5.12.3",
+    "@wdio/local-runner": "^5.13.1",
+    "@wdio/mocha-framework": "^5.12.1",
+    "@wdio/spec-reporter": "^5.12.1",
+    "@wdio/sync": "^5.13.0",
+    "babel-eslint": "^10.0.1",
+    "chromedriver": "^77.0.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "sass": "^1.18.0",
+    "sass-loader": "^7.1.0",
+    "vue-cli-plugin-vuetify": "^0.6.3",
+    "vue-template-compiler": "^2.6.10",
+    "vuetify-loader": "^1.2.2",
+    "wdio-chromedriver-service": "^5.0.2",
+    "wdio-docker-service": "^2.1.2"
+  }
+}
