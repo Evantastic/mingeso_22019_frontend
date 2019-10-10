@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('install') {
             steps {
-                sh 'chmod +x frontDeploy.sh'
+                sh 'chmod +x frontDeployter.sh'
                 sh 'npm install'
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh './frontDeploy.sh'
+                sh './frontDeployter.sh'
             }
         }
     }
