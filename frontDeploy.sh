@@ -1,12 +1,9 @@
 #!/bin/bash
 
-
-
 IMAGE=vuejs-docker
 CONTAINER=vuejs-docker-container
 PORT=9090
 EXPORT=80
-
 
 docker build -t $IMAGE .
 
