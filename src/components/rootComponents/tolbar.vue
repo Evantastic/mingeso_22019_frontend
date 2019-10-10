@@ -1,51 +1,66 @@
 <template>
   <!-- etiqueta propia de vuetiy para crear el navbar -->
-  <v-app-bar
-    app
-    height="90"
-    elevate-on-scroll
-    class="custom-color-navbar"
-  >
-    <v-img v-if="$vuetify.breakpoint.width > 400" class="test" :src="require('@/assets/imgs/minilogo.svg')" max-height="70" max-width="50"></v-img>
-    
+  <v-app-bar app height="90" elevate-on-scroll class="custom-color-navbar">
+    <v-img
+      v-if="$vuetify.breakpoint.width > 400"
+      class="test"
+      :src="require('@/assets/imgs/minilogo.svg')"
+      max-height="70"
+      max-width="50"
+    ></v-img>
+
     <!-- espacios -->
     &nbsp;
     &nbsp;
     <!-- fin espacios -->
 
-    <v-img  :src="require('@/assets/imgs/tittle_logo.svg')" max-height="95" max-width="220"></v-img>
+    <v-img :src="require('@/assets/imgs/tittle_logo.svg')" max-height="95" max-width="220"></v-img>
 
     <v-spacer></v-spacer>
 
     <!-- ################## Parte responsive ################## -->
 
-    <v-btn  v-if="$vuetify.breakpoint.mdAndUp" text to="/students">
+    <v-btn v-if="$vuetify.breakpoint.mdAndUp" text to="/students">
       <span class="mr-2"></span>
     </v-btn>
 
+    <div v-if="$vuetify.breakpoint.mdAndUp">
+      <v-btn v-for="item in modules" :key="item" class="custom-menu-btn" text @click="$vuetify.goTo('#' + item, options)">
+        <span class="mr-2 text--white">{{item}}</span>
+      </v-btn>
+    </div>
     <v-divider inset class="custom-color-divider mx-5" vertical></v-divider>
 
-    <v-btn v-if="$vuetify.breakpoint.mdAndUp" class="custom-menu-btn" text to="/">
+    <v-btn v-if="$vuetify.breakpoint.mdAndUp" class="custom-menu-btn" text @click="$vuetify.goTo(0, options)">
       <span class="mr-2 text--white">Inicio</span>
     </v-btn>
-
   </v-app-bar>
 </template>
 
 <script>
-
-
 export default {
-  components: {
-    
-  },
+  components: {},
   data: () => ({
-    scrollPosition: 0
+    scrollPosition: 0,
+    modules: ["Habitaciones", "Nosotros", "Reserva"],
+    duration: 1000,
+    offset: -70,
   }),
+  computed: {
+    options() {
+      return {
+        duration: this.duration,
+        offset: this.offset,
+      };
+    },
+  },
   methods: {
     updateScroll() {
       this.scrollPosition = window.scrollY;
-    }
+    },
+    updateSelector(element){
+      this.selector = "#"+element;
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.updateScroll);
@@ -56,12 +71,12 @@ export default {
 
 
 <style >
-.text--white{
-  color:white;
+.text--white {
+  color: white;
 }
 
 .custom-color-navbar {
-  background-color: #302F2D !important;
+  background-color: #302f2d !important;
   transition: background-color 0.5s ease-out, box-shadow 0.5s ease-out !important;
 }
 
@@ -96,5 +111,4 @@ export default {
   background-size: 12px 20px;
   background-position: 0% 45%;
 }
-
 </style>

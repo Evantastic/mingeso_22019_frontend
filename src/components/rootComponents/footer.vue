@@ -3,7 +3,6 @@
     <v-row justify="center" align="center" class="pt-5 px-4">
       <v-col cols="12" lg="6" xl="6">
         <v-row align="center">
-
           <!-- espacios -->
           &nbsp;
           &nbsp;
@@ -11,27 +10,40 @@
           <span class="headline text-uppercase white--text">
             <strong class="color-logo-text">HABBO HOTEL</strong>
           </span>
+        </v-row>
+        &nbsp;
+        &nbsp;
+        
+        <v-row justify="center" align="center">
+          <span class="white--text">
+            De viaje, pero sintiéndose en casa.
+            Nuestras amplias habitaciones diseñadas para la comodidad y el descanso.
+            Cercano a estación de Metro y Centros comerciales.
+            Totalmente equipadas para disfrutar de largas estadías o vacaciones en Santiago.
+          </span>
+          </v-row>
+          &nbsp;
 
-        </v-row>
-        &nbsp;
-        &nbsp;
-        <v-row >
-           <span class="white--text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident rem aspernatur soluta molestias? Suscipit, tenetur perspiciatis officiis expedita quibusdam dolore ratione assumenda libero sequi. Aliquam tempore suscipit quos rem explicabo.</span>
-        </v-row>
+         <v-row class="px-4"> <span class="white--text">San Sebastián 2800</span> </v-row>
+         <v-row class="px-4"> <span class="white--text">Las Condes, Santiago - Chile</span> </v-row>
+         <v-row class="px-4"> <span class="white--text">Mesa Central: +562 2498 1800</span> </v-row>
+        
       </v-col>
 
       <v-col cols="12" lg="6" xl="6">
         <v-row justify="center" align="center">
-          <v-col lighten-1 class="text-xs-center py-1" >
+          <v-col lighten-1 class="text-xs-center py-1">
             <v-btn v-for="icon in icons" :key="icon" class="mx-4 my-4 white--text" icon>
-              <v-icon  size="35px">{{ icon }}</v-icon>
+              <v-icon size="35px">{{ icon }}</v-icon>
             </v-btn>
           </v-col>
 
           <v-divider class="light-footer-theme" vertical></v-divider>
 
-          <v-col class="text-center white--text"  >
-            <h2 class="text-center " display-3><a class="custom_link white--text" href="/">Contactanos</a></h2>
+          <v-col class="text-center white--text">
+            <h2 class="text-center" display-3>
+              <a class="custom_link white--text" @click="$vuetify.goTo('#Reserva', options)">Contactanos</a>
+            </h2>
           </v-col>
         </v-row>
       </v-col>
@@ -39,7 +51,7 @@
         <v-divider class="light-footer-theme"></v-divider>
       </v-col>
 
-      <v-col class="lighten-1 py-3 white--text text-left" cols=6>
+      <v-col class="lighten-1 py-3 white--text text-left" cols="6">
         <img
           class="logo-footer-size pt-2"
           :src="require('@/assets/imgs/chile.svg')"
@@ -49,9 +61,9 @@
         {{ new Date().getFullYear() }}
       </v-col>
       <v-col class="lighten-1 py-3 white--text text-right">
-        <div> <div class="color-logo-text">Habbo Hotel</div>
-        &nbsp;
-        Todos los derechos reservados.
+        <div>
+          <div class="color-logo-text">Habbo Hotel</div>&nbsp;
+          Todos los derechos reservados.
         </div>
       </v-col>
     </v-row>
@@ -70,9 +82,8 @@ export default {
 </script>
 
 <style scoped>
-
 .color-logo-text {
-    background: -webkit-linear-gradient(#9d7943,#e5b864,#9d7943);
+  background: -webkit-linear-gradient(#9d7943, #e5b864, #9d7943);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -81,9 +92,8 @@ export default {
   transition: color 0.2s ease-out !important;
 }
 
-
 .custom_link:hover {
-  background: -webkit-linear-gradient(#9d7943,#e5b864,#9d7943);
+  background: -webkit-linear-gradient(#9d7943, #e5b864, #9d7943);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -91,7 +101,7 @@ export default {
   color: white;
 }
 .light-footer-theme {
-  border-color:#e5b864;
+  border-color: #e5b864;
 }
 .logo-footer-size {
   height: 25px;
