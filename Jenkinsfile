@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Deploy') {
             steps { 
-                ls
+                sh 'ls '
                 sh ' ./frontDeployter_v1.sh'
             }
         }
