@@ -27,8 +27,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo $(pwd)
-                sh './frontDeployter_v1.sh'
+                
+                sh ' ./frontDeployter_v1.sh'
             }
         }
     }
