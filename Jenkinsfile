@@ -28,8 +28,7 @@ pipeline {
         stage('Deploy') {
             steps { 
                 sh 'ls'
-                sh 
-                '''
+                sh '''
                     IMAGE=vuejs-docker
                     CONTAINER=vuejs-docker-container
                     PORT=9090
