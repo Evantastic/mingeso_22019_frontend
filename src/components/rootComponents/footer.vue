@@ -42,7 +42,7 @@
 
           <v-col class="text-center white--text">
             <h2 class="text-center" display-3>
-              <a class="custom_link white--text" @click="$vuetify.goTo('#Reserva', options)">Contactanos</a>
+              <a class="custom_link white--text" @click="$vuetify.goTo('#Reserva', options)">Contáctanos</a>
             </h2>
           </v-col>
         </v-row>

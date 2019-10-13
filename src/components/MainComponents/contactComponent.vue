@@ -8,7 +8,7 @@
     </v-row>
     <v-container>
       <v-row align="start" justify="center" class="mt-3">
-          <h1 class="text-center font-weight-blod headline pa-4 pb-5 mb-4">Te invitamos a conocer  hotel en el sector Oriente de Santiago, Nueva Las Condes. Nos encontramos a pasos de importantes centros comerciales, la mejor conectividad y una excelente oferta gastronómica y turística.</h1>
+          <h1 class="text-center font-weight-blod headline pa-4 pb-5 mb-4">Te invitamos a conocer nuestro hotel en el sector Oriente de Santiago, Nueva Las Condes. Nos encontramos a pasos de importantes centros comerciales, la mejor conectividad y una excelente oferta gastronómica y turística.</h1>
         <v-col class="text-center">
           <v-img class="custom-img-contact mr-4" :src="require('@/assets/imgs/phone.svg')" max-width="600"></v-img>
         </v-col>
@@ -18,7 +18,7 @@
           <v-row class="font-weight-light display-5"> Las Condes, Santiago - Chile </v-row>
           &nbsp;
           &nbsp;
-          <v-row class="font-weight-light display-1">Nuestra número:</v-row>  
+          <v-row class="font-weight-light display-1">Nuestro número:</v-row>  
           <v-row class="font-weight-light display-5"> Mesa Central: +562 2498 1800 </v-row>
         </v-col>
       </v-row>
