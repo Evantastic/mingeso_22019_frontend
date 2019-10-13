@@ -17,7 +17,7 @@ COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 RUN rm /etc/nginx/conf.d/default.conf
 
-COPY  /app/config/default.conf /etc/nginx/conf.d/
+COPY  /app/config /etc/nginx/conf.d/
 
 CMD ["nginx", "-g", "daemon off;"]
 
