@@ -27,6 +27,9 @@
          <v-row class="px-4"> <span class="white--text">San Sebastián 2800</span> </v-row>
          <v-row class="px-4"> <span class="white--text">Las Condes, Santiago - Chile</span> </v-row>
          <v-row class="px-4"> <span class="white--text">Mesa Central: +562 2498 1800</span> </v-row>
+         <br>
+         <v-row class="px-4"><a class="custom_link white--text color-logo-text" @click="$router.push('/app')">App</a>
+          </v-row>
         
       </v-col>
 
@@ -52,11 +55,13 @@
       </v-col>
 
       <v-col class="lighten-1 py-3 white--text text-left" cols="6">
+        
         <img
           class="logo-footer-size pt-2"
           :src="require('@/assets/imgs/chile.svg')"
           alt="chile_flag"
         />
+        
         &nbsp;
         {{ new Date().getFullYear() }}
       </v-col>
