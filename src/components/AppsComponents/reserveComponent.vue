@@ -5,7 +5,7 @@
         {{ 'Reserva realizada exitosamente'}}
         <v-btn color="white" text @click="setSuccess(null)">Cerrar</v-btn>
       </v-snackbar>
-      <v-snackbar v-model="this.error" color="error" :bottom="true">
+      <v-snackbar v-model="error" color="error" :bottom="true">
         {{ 'No se ha podido realizar la reserva'}}
         <v-btn color="white" text @click="setSuccess(null)">Cerrar</v-btn>
       </v-snackbar>
@@ -23,6 +23,7 @@
                   :rules="nameRules"
                   label="Nombre y apellidos del huésped"
                   required
+                  
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -185,16 +186,18 @@ export default {
     date2: null,
     phone: "",
     menuDate: false,
-    menu1:"",
-    menu2:"",
+    menu1: "",
+    menu2: "",
     valid: true,
     name: "",
-    nameRules: [v => !!v || "El nombre es requerido"],
-    lastNameRules: [v => !!v || "El apellido es requerido"],
+    nameRules: [v => !!v || "El nombre es requerido",
+                v=> /^[a-zA-Z ]+$/.test(v) || "El nombre debe ser válido",
+                v => v.length <= 70 || "El máximo de caracteres es 70" ],
     email: "",
     emailRules: [
       v => !!v || "El correo es requerido",
-      v => /.+@.+\..+/.test(v) || "El correo debe ser válido"
+      v =>
+        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ .test(v) || "El correo debe ser válido"
     ],
     dateRules: [
       v => !!v || "La fecha es requerida",
@@ -212,13 +215,13 @@ export default {
     checkbox: false
   }),
   computed: {
-    ...mapState("reserveStore", ["dialog", "success", "error"]),
+    ...mapState("reserveStore", ["dialog", "success", "error", "loading"]),
     ...mapState("roomStore", ["rooms"]),
 
     todayD() {
       return this.todayDate(this.today);
     },
-    tommorowD(){
+    tommorowD() {
       return this.tommorowDate(this.date1);
     },
     computedDateFormatted() {
@@ -256,13 +259,13 @@ export default {
       "setPhone",
       "setRoomId"
     ]),
-    ...mapActions("reserveStore",["postReserva"]),
+    ...mapActions("reserveStore", ["postReserva"]),
 
-    getRoomID(room){
+    getRoomID(room) {
       for (let index = 0; index < this.rooms.length; index++) {
         const element = this.rooms[index].title;
         if (element === room) {
-          return this.rooms[index].id
+          return this.rooms[index].id;
         }
       }
     },
@@ -277,24 +280,21 @@ export default {
       this.computedDateFormatte2 = null;
     },
     sendCompleteInfo() {
-      
       this.setStartDate(this.computedDateFormatted1);
-      
+
       this.setEndDate(this.computedDateFormatted2);
-      
+
       this.setName(this.name);
-      
+
       this.setBirth(this.computedDateFormatted1);
-      
+
       this.setEmail(this.email);
-      
+
       this.setPhone(this.phone);
-      
+
       this.setRoomId(this.getRoomID(this.select));
 
       this.postReserva();
-
-
     },
     closeForm() {
       this.$refs.form.reset();

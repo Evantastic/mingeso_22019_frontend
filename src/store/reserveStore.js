@@ -5,6 +5,9 @@ const state = {
   success: false,
   error: false,
   loading: false,
+  successT: false,
+  errorT: false,
+  loadingT: false,
   startDate: "",
   endDate: "",
   name: "",
@@ -12,7 +15,8 @@ const state = {
   email: "",
   phone: "",
   roomId: "",
-  reservas: []
+  reservas: [],
+  reservasTime :[]
 };
 
 const mutations = {
@@ -28,8 +32,20 @@ const mutations = {
   setSuccess(state, payload) {
     state.success = payload;
   },
+  setErrorT(state, payload) {
+    state.errorT = payload;
+  },
+  setLoadingT(state, payload) {
+    state.loadingT = payload;
+  },
+  setSuccessT(state, payload) {
+    state.successT = payload;
+  },
   setReservas(state, payload) {
     state.reservas = payload;
+  },
+  setReservasTime(state, payload) {
+    state.reservasTime = payload;
   },
   setStartDate(state, payload) {
     state.startDate = payload;
@@ -70,6 +86,24 @@ const actions = {
       })
       .finally(function() {
         commit("setLoading", false);
+      });
+  },
+  getReservasByDate({ commit },start,end) {
+    commit("setLoadingT", true);
+    axios
+      .get("http://35.224.191.225:8081/Backend/api/services/rack?end="+end+"&start="+start)
+      .then(function(response) {
+        console.log(response);
+        commit("setReservasTime", response.data);
+        commit("setSuccessT", true);
+      })
+      .catch(function(error) {
+        commit("setErrorT", true);
+        console.log(error);
+      })
+      .finally(function() {
+        commit("setLoadingT", false);
+        console.log("termine");
       });
   },
   postReserva({ commit }) {

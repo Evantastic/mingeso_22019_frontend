@@ -7,7 +7,8 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import { CarouselPlugin } from 'bootstrap-vue'
 
-Vue.use(CarouselPlugin)
+Vue.use(CarouselPlugin),
+Vue.use(require('vue-moment'));
 Vue.config.productionTip = false
 
 new Vue({

@@ -14,9 +14,11 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.3",
     "core-js": "^2.6.5",
+    "moment": "^2.24.0",
     "npm-watch": "^0.6.0",
     "roboto-fontface": "*",
     "vue": "^2.6.10",
+    "vue-moment": "^4.0.0",
     "vue-router": "^3.0.3",
     "vuetify": "^2.0.0",
     "vuex": "^3.0.1"
