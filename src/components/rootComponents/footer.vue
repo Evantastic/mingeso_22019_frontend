@@ -33,7 +33,7 @@
       <v-col cols="12" lg="6" xl="6">
         <v-row justify="center" align="center">
           <v-col lighten-1 class="text-xs-center py-1">
-            <v-btn v-for="icon in icons" :key="icon" class="mx-4 my-4 white--text" icon>
+            <v-btn @click="$router.push('/contact')" v-for="icon in icons" :key="icon" class="mx-4 my-4 white--text" icon>
               <v-icon size="35px">{{ icon }}</v-icon>
             </v-btn>
           </v-col>
