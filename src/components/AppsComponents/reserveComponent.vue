@@ -22,8 +22,8 @@
                   v-model="name"
                   :rules="nameRules"
                   label="Nombre y apellidos del huésped"
+                  :counter="70"
                   required
-                  
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -56,9 +56,11 @@
               full-width
               max-width="290px"
               min-width="290px"
+              required
             >
               <template v-slot:activator="{ on }">
                 <v-text-field
+                  
                   v-model="dateFormatted"
                   label="Fecha de nacimiento huésped"
                   hint="En formato : dd-mm-aaaa"
@@ -67,10 +69,11 @@
                   prepend-icon="fas fa-calendar-alt"
                   :rules="dateRules"
                   required
+                  
                   class="pb-5"
                 ></v-text-field>
               </template>
-              <v-date-picker v-model="date" no-title @input="menuDate = false"></v-date-picker>
+              <v-date-picker ref="picker" required v-model="date" :max="maxD" no-title @input="menuDate = false"></v-date-picker>
             </v-menu>
 
             <template>
@@ -87,6 +90,7 @@
                         full-width
                         max-width="290px"
                         min-width="290px"
+                        required
                       >
                         <template v-slot:activator="{ on }">
                           <v-text-field
@@ -94,12 +98,14 @@
                             label="Fecha inicio de reserva"
                             hint="En formato : dd-mm-aaaa"
                             persistent-hint
+                            :rules="dateRules"
                             prepend-icon="fas fa-calendar-alt"
                             v-on="on"
                             required
                           ></v-text-field>
                         </template>
                         <v-date-picker
+                        required
                           v-model="date1"
                           :min="todayD"
                           no-title
@@ -118,6 +124,7 @@
                         max-width="290px"
                         min-width="290px"
                         :disabled="computedDateFormatted1 === null"
+                        required
                       >
                         <template v-slot:activator="{ on }">
                           <v-text-field
@@ -126,6 +133,7 @@
                             hint="En formato : dd-mm-aaaa"
                             persistent-hint
                             prepend-icon="fas fa-calendar-alt"
+                            :rules="dateRules"
                             readonly
                             v-on="on"
                             required
@@ -138,21 +146,38 @@
                           :min="tommorowD"
                           no-title
                           @input="menu2 = false"
+                          required
                         ></v-date-picker>
                       </v-menu>
                     </v-col>
                   </v-row>
                   <v-row>
-                    <v-autocomplete
-                      class="mx-5 py-3"
-                      v-model="select"
-                      :rules="[() => !!select || 'La habitación es requerida']"
-                      :items="items"
-                      label="Habitación"
-                      placeholder="Elige el tipo de habitación"
-                      required
-                      hide-no-data
-                    ></v-autocomplete>
+                    <v-col>
+                      <v-autocomplete
+                        class="mx-5 py-3"
+                        v-model="selectType"
+                        :rules="[() => !!selectType || 'La habitación es requerida']"
+                        :items="roomTitle"
+                        label="Habitación"
+                        placeholder="Elige el tipo de habitación"
+                        required
+                        :loading="loadingTy"
+                        hide-no-data
+                      ></v-autocomplete>
+                    </v-col>
+                    <v-col>
+                      <v-autocomplete
+                        class="mx-5 py-3"
+                        v-model="selectNumber"
+                        :rules="[() => !!selectNumber || 'El número de habitación es requerido']"
+                        :items="roomNumbers"
+                        label=" Número de Habitación"
+                        placeholder="Elige el número de habitación"
+                        required
+                        :loading="loadingTy"
+                        hide-no-data
+                      ></v-autocomplete>
+                    </v-col>
                   </v-row>
                 </v-container>
               </v-card>
@@ -190,14 +215,19 @@ export default {
     menu2: "",
     valid: true,
     name: "",
-    nameRules: [v => !!v || "El nombre es requerido",
-                v=> /^[a-zA-Z ]+$/.test(v) || "El nombre debe ser válido",
-                v => v.length <= 70 || "El máximo de caracteres es 70" ],
+    dateFormatted: "",
+    nameRules: [
+      v => !!v || "El nombre es requerido",
+      v => /^[a-zA-Z ñáéíóúüÁÉÍÓÚÚÑ]+$/.test(v) || "El nombre debe ser válido",
+      v => v.length <= 70 || "El máximo de caracteres es 70"
+    ],
     email: "",
     emailRules: [
       v => !!v || "El correo es requerido",
       v =>
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ .test(v) || "El correo debe ser válido"
+        /^(([^<>()\\.,;:\s@"]+(\.[^<>()\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+          v
+        ) || "El correo debe ser válido"
     ],
     dateRules: [
       v => !!v || "La fecha es requerida",
@@ -211,15 +241,53 @@ export default {
         /^[+]{1}[5]{1}[6]{1}\d{9}$/.test(v) ||
         "El número debe ser del tipo +56XXXXXXXXX"
     ],
-    select: null,
+    selectType: null,
+    selectNumber: null,
     checkbox: false
   }),
   computed: {
     ...mapState("reserveStore", ["dialog", "success", "error", "loading"]),
-    ...mapState("roomStore", ["rooms"]),
+    ...mapState("roomType", ["roomType", "loadingTy"]),
 
+    maxD() {
+      return this.maxDate(this.today);
+
+    },
     todayD() {
       return this.todayDate(this.today);
+      
+    },
+    roomTitle: {
+      get: function() {
+        let items = [];
+        for (let index = 0; index < this.roomType.length; index++) {
+          const element = this.roomType[index].roomTitle;
+          items.push(element);
+        }
+        return items;
+      },
+      set: function() {}
+    },
+    roomNumbers: {
+      get: function() {
+        if (this.selectType === null) {
+          return [];
+        }
+        else{
+          for (let index = 0; index < this.roomType.length; index++) {
+          const element = this.roomType[index].roomTitle;
+          if (this.selectType === element) {
+            return this.roomType[index].rooms;
+          }
+        }
+        return [];
+
+        }
+        
+      },
+      set: function() {
+        
+      }
     },
     tommorowD() {
       return this.tommorowDate(this.date1);
@@ -232,22 +300,25 @@ export default {
     },
     computedDateFormatted2() {
       return this.formatDate(this.date2);
-    },
-    items() {
-      let items = [];
-      for (let index = 0; index < this.rooms.length; index++) {
-        const element = this.rooms[index].title;
-        items.push(element);
-      }
-      return items;
     }
   },
   watch: {
+    menuDate (val) {
+        val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
+      },
     date() {
       this.dateFormatted = this.formatDate(this.date);
     }
   },
+  mounted() {
+    this.getRoomType();
+
+    this.roomTitle = this.roomType[0];
+  },
   methods: {
+    save (date) {
+        this.$refs.menuDate.save(date)
+      },
     ...mapMutations("reserveStore", [
       "setDialog",
       "setSuccess",
@@ -260,6 +331,7 @@ export default {
       "setRoomId"
     ]),
     ...mapActions("reserveStore", ["postReserva"]),
+    ...mapActions("roomType", ["getRoomType"]),
 
     getRoomID(room) {
       for (let index = 0; index < this.rooms.length; index++) {
@@ -292,9 +364,11 @@ export default {
 
       this.setPhone(this.phone);
 
-      this.setRoomId(this.getRoomID(this.select));
+      this.setRoomId(this.selectNumber);
 
       this.postReserva();
+      
+      this.resetForm();
     },
     closeForm() {
       this.$refs.form.reset();
@@ -305,6 +379,13 @@ export default {
       this.computedDateFormatted = null;
       this.computedDateFormatted1 = null;
       this.computedDateFormatte2 = null;
+    },
+    maxDate(date) {
+      if (!date) return null;
+      var [year, month, day] = date.split("-");
+      year = year - 18;
+      return `${year}-${month}-${day}`;
+
     },
     todayDate(date) {
       if (!date) return null;

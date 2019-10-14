@@ -16,7 +16,7 @@ const state = {
   phone: "",
   roomId: "",
   reservas: [],
-  reservasTime :[]
+  reservasTime: []
 };
 
 const mutations = {
@@ -88,10 +88,15 @@ const actions = {
         commit("setLoading", false);
       });
   },
-  getReservasByDate({ commit },start,end) {
+  async getReservasByDate({ commit }, payload) {
     commit("setLoadingT", true);
-    axios
-      .get("http://35.224.191.225:8081/Backend/api/services/rack?end="+end+"&start="+start)
+    await axios
+      .get(
+        "http://35.224.191.225:8081/Backend/api/services/rack?end=" +
+          payload.end +
+          "&start=" +
+          payload.start
+      )
       .then(function(response) {
         console.log(response);
         commit("setReservasTime", response.data);
@@ -116,7 +121,7 @@ const actions = {
         birth: state.birth,
         email: state.email,
         phone: state.phone,
-        roomId: state.roomId
+        roomNumber: state.roomId
       })
       .then(function(response) {
         console.log(response);

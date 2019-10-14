@@ -98,7 +98,7 @@
                   outlined
                   :loading="loadingT"
                   class="black-text"
-                  @click="getAllData(computedDateFormatted1,computedDateFormatted2)"
+                  @click="getAllData()"
                 >Filtrar</v-btn>
               </v-col>
             </v-row>
@@ -139,8 +139,6 @@ export default {
     menu1: false,
     menu2: false,
     dateError: false,
-    startDate: "10-10-2019",
-    endDate: "18-10-2019",
 
     coloreatedUser: [],
 
@@ -290,18 +288,28 @@ export default {
       }
       return array;
     },
-    getAllData(start, end) {
-      var fecha1 = moment(start, "DD-MM-YYYY");
-      var fecha2 = moment(end, "DD-MM-YYYY");
+    async getAllData() {
+      var fecha1 = moment(this.computedDateFormatted1, "DD-MM-YYYY");
+      var fecha2 = moment(this.computedDateFormatted2, "DD-MM-YYYY");
+      console.log(this.computedDateFormatted1,this.computedDateFormatted2);
+      var data_1 = this.computedDateFormatted1;
+      var data_2 = this.computedDateFormatted2;
+
+      var payloadOBJ = {start:data_1, end:data_2 };
+
       if (fecha2.diff(fecha1, "days") < 0) {
         this.dateError = true;
       } else {
-        this.getReservasByDate(start, end);
-        console.log("listo1");
-        this.headers = this.getHeaders(start, end);
-        console.log("listo2");
+        await this.getReservasByDate(payloadOBJ);
+        console.log("paso1")
+        
+        this.headers = this.getHeaders(data_1,data_2);
+        console.log("paso2")
+       
         this.items = this.getItems(this.reservasTime, this.headers);
-        console.log("listo3");
+        console.log("termine_2")
+        
+       
 
         //this.coloreatedUser = this.getColorUser(this.reservasTime);
       }
