@@ -3,9 +3,10 @@
     <tolbar></tolbar>
     <overlay></overlay>
     <carousel></carousel>
-    <contact id="Nosotros" class = "back-color-contact"></contact>
+    <about id="Nosotros" class = "back-color-contact"></about>
     <rooms id="Habitaciones"></rooms>
     <reserva id="Reserva"></reserva>
+    <contact id="Contacto" class = "back-color-contact--white"></contact>
     <Footer></Footer>
   </div>
 </template>
@@ -20,6 +21,7 @@ import overlay from '@/components/MainComponents/overlayComponent'
 
 import carousel from '@/components/MainComponents/carouselComponent'
 import rooms from "@/components/MainComponents/roomsComponent"
+import about from "@/components/MainComponents/aboutComponent"
 import contact from "@/components/MainComponents/contactComponent"
 import reserva from "@/components/MainComponents/reservaComponent"
 
@@ -30,7 +32,6 @@ import reserva from "@/components/MainComponents/reservaComponent"
 export default {
   // ejemplo de pagina de hotel :  https://www.plazaelbosque.cl
 
-  
   components: {
     tolbar,
     Footer,
@@ -38,6 +39,7 @@ export default {
     rooms,
     contact,
     reserva,
+    about,
     overlay,
   },
 
@@ -55,6 +57,10 @@ export default {
 }
 .back-color-contact {
   background-color: #bebebe !important;
+}
+
+.back-color-contact--white{
+  background-color: white !important; 
 }
 
 </style>
