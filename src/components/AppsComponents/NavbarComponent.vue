@@ -6,7 +6,7 @@
       <span class="font-weight-light">App</span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn color="white" class="black-text" @click="setDialog(true)">Nueva Reserva</v-btn>
+    <v-btn color="white" class="black-text" @click="getData()">Nueva Reserva</v-btn>
   </v-app-bar>
 </template>
 
@@ -19,6 +19,10 @@ export default {
   methods: {
     ...mapMutations("appRootStore", ["setDrawer"]),
     ...mapMutations("reserveStore", ["setDialog"]),
+
+    getData(){
+      this.setDialog(true);
+    }
   }
 };
 </script>

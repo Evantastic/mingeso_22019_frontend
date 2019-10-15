@@ -42,7 +42,7 @@ export default {
   components: {},
   data: () => ({
     scrollPosition: 0,
-    modules: ["Habitaciones", "Nosotros", "Reserva"],
+    modules: ["Nosotros","Habitaciones", "Reserva","Contacto"],
     duration: 1000,
     offset: -70,
   }),

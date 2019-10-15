@@ -27,16 +27,13 @@
          <v-row class="px-4"> <span class="white--text">San Sebastián 2800</span> </v-row>
          <v-row class="px-4"> <span class="white--text">Las Condes, Santiago - Chile</span> </v-row>
          <v-row class="px-4"> <span class="white--text">Mesa Central: +562 2498 1800</span> </v-row>
-         <br>
-         <v-row class="px-4"><a class="custom_link white--text color-logo-text" @click="$router.push('/app')">App</a>
-          </v-row>
         
       </v-col>
 
       <v-col cols="12" lg="6" xl="6">
         <v-row justify="center" align="center">
           <v-col lighten-1 class="text-xs-center py-1">
-            <v-btn v-for="icon in icons" :key="icon" class="mx-4 my-4 white--text" icon>
+            <v-btn @click="$router.push('/contact')" v-for="icon in icons" :key="icon" class="mx-4 my-4 white--text" icon>
               <v-icon size="35px">{{ icon }}</v-icon>
             </v-btn>
           </v-col>
@@ -45,7 +42,7 @@
 
           <v-col class="text-center white--text">
             <h2 class="text-center" display-3>
-              <a class="custom_link white--text" @click="$vuetify.goTo('#Reserva', options)">Contáctanos</a>
+              <a class="custom_link white--text" @click="$vuetify.goTo('#Contacto')">Contáctanos</a>
             </h2>
           </v-col>
         </v-row>

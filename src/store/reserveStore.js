@@ -5,6 +5,9 @@ const state = {
   success: false,
   error: false,
   loading: false,
+  successT: false,
+  errorT: false,
+  loadingT: false,
   startDate: "",
   endDate: "",
   name: "",
@@ -12,7 +15,8 @@ const state = {
   email: "",
   phone: "",
   roomId: "",
-  reservas: []
+  reservas: [],
+  reservasTime: []
 };
 
 const mutations = {
@@ -28,8 +32,20 @@ const mutations = {
   setSuccess(state, payload) {
     state.success = payload;
   },
+  setErrorT(state, payload) {
+    state.errorT = payload;
+  },
+  setLoadingT(state, payload) {
+    state.loadingT = payload;
+  },
+  setSuccessT(state, payload) {
+    state.successT = payload;
+  },
   setReservas(state, payload) {
     state.reservas = payload;
+  },
+  setReservasTime(state, payload) {
+    state.reservasTime = payload;
   },
   setStartDate(state, payload) {
     state.startDate = payload;
@@ -72,8 +88,33 @@ const actions = {
         commit("setLoading", false);
       });
   },
+  async getReservasByDate({ commit }, payload) {
+    commit("setLoadingT", true);
+    await axios
+      .get(
+        "http://35.224.191.225:8081/Backend/api/services/rack?end=" +
+          payload.end +
+          "&start=" +
+          payload.start
+      )
+      .then(function(response) {
+        console.log(response);
+        commit("setReservasTime", response.data);
+        commit("setSuccessT", true);
+      })
+      .catch(function(error) {
+        commit("setErrorT", true);
+        console.log(error);
+      })
+      .finally(function() {
+        commit("setLoadingT", false);
+        console.log("termine");
+      });
+  },
   postReserva({ commit }) {
     commit("setLoading", true);
+    commit("setSuccess", null);
+    commit("setError", null);
     axios
       .post("http://35.224.191.225:8081/Backend/api/services/reserves/form", {
         startDate: state.startDate,
@@ -82,7 +123,7 @@ const actions = {
         birth: state.birth,
         email: state.email,
         phone: state.phone,
-        roomId: state.roomId
+        roomNumber: state.roomId
       })
       .then(function(response) {
         console.log(response);
