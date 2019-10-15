@@ -129,7 +129,7 @@
                         <template v-slot:activator="{ on }">
                           <v-text-field
                             v-model="computedDateFormatted2"
-                            label="Fecha de termino de reserva"
+                            label="Fecha de término de reserva"
                             hint="En formato : dd-mm-aaaa"
                             persistent-hint
                             prepend-icon="fas fa-calendar-alt"

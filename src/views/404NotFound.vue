@@ -9,7 +9,7 @@
     </v-row>
     <v-row justify="center">
       <h1 class="font-weight-light display-6">
-        Perece que algo salió mal, volvamos a
+        Parece que algo salió mal, volvamos a
         <strong>HABBO HOTEL</strong>
       </h1>
     </v-row>
