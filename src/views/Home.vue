@@ -3,8 +3,8 @@
     <tolbar></tolbar>
     <overlay></overlay>
     <carousel></carousel>
-    <rooms id="Habitaciones"></rooms>
     <contact id="Nosotros" class = "back-color-contact"></contact>
+    <rooms id="Habitaciones"></rooms>
     <reserva id="Reserva"></reserva>
     <Footer></Footer>
   </div>

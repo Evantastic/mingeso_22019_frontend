@@ -24,9 +24,9 @@ const mutations = {
 };
 
 const actions = {
-  getRoomType({ commit }) {
+  async getRoomType({ commit }) {
     commit("setLoadingTy", true);
-    axios
+    await axios
       .get("http://35.224.191.225:8081/Backend/api/services/room/choice")
       .then(function(response) {
         console.log(response);
@@ -38,6 +38,7 @@ const actions = {
         console.log(error);
       })
       .finally(function() {
+        console.log("termineRoomType")
         commit("setLoadingTy", false);
       });
   },

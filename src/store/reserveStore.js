@@ -113,6 +113,8 @@ const actions = {
   },
   postReserva({ commit }) {
     commit("setLoading", true);
+    commit("setSuccess", null);
+    commit("setError", null);
     axios
       .post("http://35.224.191.225:8081/Backend/api/services/reserves/form", {
         startDate: state.startDate,

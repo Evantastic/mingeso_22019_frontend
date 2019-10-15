@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+
 
 import drawer from "@/components/AppsComponents/DrawerComponent";
 import navbar from "@/components/AppsComponents/NavbarComponent";
@@ -25,15 +25,6 @@ export default {
     overlay,
     rack
   },
-  computed: {
-    ...mapState("roomStore", ["rooms"])
-  },
-  methods: {
-    ...mapActions("roomStore", ["getRooms"])
-  },
-  mounted() {
-    this.getRooms();
-  }
 };
 </script>
 

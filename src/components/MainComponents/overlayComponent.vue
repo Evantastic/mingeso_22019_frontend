@@ -1,5 +1,5 @@
 <template>
-  <v-overlay opacity="0.7" :value="loading">
+  <v-overlay opacity="0.7" :value="loadingTy">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
 </template>
@@ -9,7 +9,7 @@ import { mapState } from 'vuex';
 export default {
 
 computed: {
-    ...mapState("roomStore",["loading"]),
+    ...mapState("roomType",["loadingTy"]),
 }
 }
 </script>

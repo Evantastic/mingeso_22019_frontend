@@ -26,6 +26,32 @@
         </v-dialog>
       </v-row>
     </template>
+    <template>
+      <v-row justify="center">
+        <v-dialog v-model="EmptyError" persistent max-width="400">
+          <v-card>
+            <v-container>
+              <v-row justify="center" align="center">
+                <v-icon color="error">fas fa-exclamation-triangle</v-icon>
+              </v-row>
+
+              <v-row justify="center" align="center" class="pb-3">
+                <h3 class="font-weight-black headline">¡Error!</h3>
+              </v-row>
+              <v-row justify="center" align="center">
+                <span
+                  class="text-center"
+                >Los campos de fecha inicio y fecha fin no pueden quedar vacios</span>
+              </v-row>
+            </v-container>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="EmptyError = false">aceptar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
+    </template>
     <v-card max-width="auto" class="pa-5 ma-5" color="white">
       <template>
         <v-card max-width="auto" dark color="indigo" elevation="21" class="py-3 card-move-margin">
@@ -53,7 +79,7 @@
                       required
                     ></v-text-field>
                   </template>
-                  <v-date-picker v-model="date1" :min="todayD" no-title @input="menu1 = false"></v-date-picker>
+                  <v-date-picker v-model="date1" no-title @input="menu1 = false"></v-date-picker>
                 </v-menu>
               </v-col>
 
@@ -112,7 +138,6 @@
       <v-card>
         <template>
           <v-data-table
-            hide-default-footer
             :headers="headers"
             :loading="loadingT"
             :items="items"
@@ -136,18 +161,18 @@ export default {
     date1: "",
     date2: "",
     dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
+    today: new Date().toISOString().substr(0, 10),
     menu1: false,
     menu2: false,
     dateError: false,
-
+    EmptyError: false,
     coloreatedUser: [],
-
     headers: [],
-
     items: []
   }),
 
   computed: {
+    ...mapState("roomType", ["roomType", "loadingTy"]),
     ...mapState("reserveStore", [
       "loadingT",
       "successT",
@@ -169,6 +194,14 @@ export default {
     },
     computedDateFormatted2() {
       return this.formatDate(this.date2);
+    },
+    staticToday() {
+      return moment(this.today, "YYYY-MM-DD").format("DD-MM-YYYY");
+    },
+    staticEndDay() {
+      return moment(this.today, "YYYY-MM-DD")
+        .add(5, "days")
+        .format("DD-MM-YYYY");
     }
   },
   watch: {
@@ -177,7 +210,22 @@ export default {
     }
   },
 
+  async mounted() {
+    await this.getRoomType();
+
+    console.log("paso1");
+
+    this.headers = this.getHeaders(this.staticToday, this.staticEndDay);
+    console.log("paso2");
+
+    this.items = this.placeRackRoom(this.roomType);
+    console.log("paso3");
+
+    console.log(this.headers,this.items);
+  },
+
   methods: {
+    ...mapActions("roomType", ["getRoomType"]),
     ...mapActions("reserveStore", ["getReservasByDate"]),
 
     getColor(user) {
@@ -227,6 +275,29 @@ export default {
         }
         return colorUser;
       }
+    },
+
+    placeRackRoom(roomTypes) {
+      var rooms = [];
+      console.log(roomTypes)
+      for (let index = 0; index < roomTypes.length; index++) {
+        const element = roomTypes[index].rooms;
+        rooms = rooms.concat(element);
+        
+      }
+      
+      // ya se tienen todas las habitaciones
+
+      var itemsOBJ = [];
+
+      for (let i = 0; i < rooms.length; i++) {
+        const room = rooms[i];
+
+        var roomOBJ = { room: room };
+
+        itemsOBJ.push(roomOBJ);
+      }
+      return itemsOBJ;
     },
     getHeaders(dateInit, dateFinish) {
       var fecha1 = moment(dateInit, "DD-MM-YYYY");
@@ -291,28 +362,33 @@ export default {
     async getAllData() {
       var fecha1 = moment(this.computedDateFormatted1, "DD-MM-YYYY");
       var fecha2 = moment(this.computedDateFormatted2, "DD-MM-YYYY");
-      console.log(this.computedDateFormatted1,this.computedDateFormatted2);
+
       var data_1 = this.computedDateFormatted1;
       var data_2 = this.computedDateFormatted2;
 
-      var payloadOBJ = {start:data_1, end:data_2 };
+      var payloadOBJ = { start: data_1, end: data_2 };
 
       if (fecha2.diff(fecha1, "days") < 0) {
         this.dateError = true;
-      } else {
+      }
+      else if (this.date1 === "" && this.date2 === "") {
+        this.EmptyError = true;
+        
+      }
+       else {
         await this.getReservasByDate(payloadOBJ);
-        console.log("paso1")
-        
-        this.headers = this.getHeaders(data_1,data_2);
-        console.log("paso2")
-       
+
+        this.headers = this.getHeaders(data_1, data_2);
+
         this.items = this.getItems(this.reservasTime, this.headers);
-        console.log("termine_2")
-        
-       
 
         //this.coloreatedUser = this.getColorUser(this.reservasTime);
       }
+
+      this.computedDateFormatted1= "";
+      this.computedDateFormatted2= "";
+      this.date1= "";
+      this.date2= "";
     },
 
     getItemObject(reserva, headers) {
@@ -338,7 +414,7 @@ export default {
 
     getItems(reserves, headers) {
       var rooms = [];
-      var items = [];
+      var items = this.placeRackRoom(this.roomType);
       for (let index = 0; index < reserves.length; index++) {
         const element = reserves[index].roomNumber;
 

@@ -134,6 +134,7 @@
                             persistent-hint
                             prepend-icon="fas fa-calendar-alt"
                             :rules="dateRules"
+                            :max="max3Y"
                             readonly
                             v-on="on"
                             required
@@ -202,6 +203,7 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from "vuex";
+import moment from 'moment'
 export default {
   data: vm => ({
     vm,
@@ -218,7 +220,7 @@ export default {
     dateFormatted: "",
     nameRules: [
       v => !!v || "El nombre es requerido",
-      v => /^[a-zA-Z ñáéíóúüÁÉÍÓÚÚÑ]+$/.test(v) || "El nombre debe ser válido",
+      v => /^[a-zA-ZñáéíóúüÁÉÍÓÚÚÑ]+[a-zA-Z ñáéíóúüÁÉÍÓÚÚÑ]*$/.test(v) || "El nombre debe ser válido",
       v => v.length <= 70 || "El máximo de caracteres es 70"
     ],
     email: "",
@@ -251,6 +253,10 @@ export default {
 
     maxD() {
       return this.maxDate(this.today);
+    },
+    max3Y(){
+
+      return  moment(this.today,'YYYY-MM-DD').add(3,'years').format('YYYY-MM-DD');
 
     },
     todayD() {
@@ -310,11 +316,11 @@ export default {
       this.dateFormatted = this.formatDate(this.date);
     }
   },
-  mounted() {
-    this.getRoomType();
-
-    this.roomTitle = this.roomType[0];
+  mounted(){
+    var hola = moment(this.today,'YYYY-MM-DD').add(3,'years').format('YYYY-MM-DD');
+      console.log(hola);
   },
+  
   methods: {
     save (date) {
         this.$refs.menuDate.save(date)
@@ -386,6 +392,12 @@ export default {
       year = year - 18;
       return `${year}-${month}-${day}`;
 
+    },
+    max3YearDate(date) {
+      if (!date) return null;
+      var [year, month, day] = date.split("-");
+      year = year + 3;
+      return `${year}-${month}-${day}`;
     },
     todayDate(date) {
       if (!date) return null;
